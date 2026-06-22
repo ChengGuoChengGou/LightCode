@@ -193,7 +193,8 @@ class GenericAgent:
 
 GeneraticAgent = GenericAgent
 
-if __name__ == '__main__':
+def main():
+    """Entry point for external callers (e.g. main.py)."""
     import argparse
     from datetime import datetime
     parser = argparse.ArgumentParser()
@@ -306,3 +307,6 @@ if __name__ == '__main__':
             except KeyboardInterrupt:
                 agent.abort()
                 print('\n[Interrupted]')
+
+if __name__ == '__main__':
+    main()
