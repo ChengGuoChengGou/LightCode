@@ -224,7 +224,7 @@ def main():
 
     if args.task:
         agent.peer_hint = False
-        agent.force_non_stream = True
+        # agent.force_non_stream = True  # minimax API stream模式正常，不需要强制non-stream
         agent.task_dir = d = os.path.join(script_dir, f'temp/{args.task}'); nround = ''
         infile = os.path.join(d, 'input.txt')
         if args.input:

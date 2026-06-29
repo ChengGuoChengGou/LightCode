@@ -56,10 +56,19 @@ LIMITS = {
 
 # === Token Estimation ===
 
-def estimate_tokens(messages: List[dict]) -> int:
-    """粗略估算消息列表的token数 (≈1 token per 4 chars)"""
+def estimate_tokens(messages) -> int:
+    """粗略估算消息列表的token数 (≈1 token per 4 chars)
+    兼容: List[dict], 单个dict, 单个str
+    """
+    if isinstance(messages, str):
+        return max(1, len(messages) // 4)
+    if isinstance(messages, dict):
+        messages = [messages]
     total_chars = 0
     for msg in messages:
+        if isinstance(msg, str):
+            total_chars += len(msg)
+            continue
         content = msg.get('content', '')
         if isinstance(content, str):
             total_chars += len(content)
